@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="WURFLChannelProvider" class="org.jahia.modules.wurfl.WURFLProvider">
+        <property name="priority" value="0"/>
+        <property name="channelService" ref="ChannelService"/>
+        <property name="wurflModel" ref="wurflModel"/>
+        <property name="wurflManager" ref="wurflManager"/>
+    </bean>
+
+    <!-- WURFL Java API Beans -->
+
+    <!-- =================WURFL MODEL REPRESENTATION========================== -->
+    <bean id="wurflModel" class="net.sourceforge.wurfl.spring.SpringWURFLModel">
+        <!--default root file location-->
+        <property name="wurfl" value="/modules/wurfl-provider/WEB-INF/wurfl-2.3.1.zip"/>
+
+        <!--if you have only one patchfile , you can write this way-->
+        <!--<property name="wurflPatch" value="/modules/wurfl-provider/WEB-INF/web_browsers_patch.xml"/>-->
+
+        <!-- otherwise, for 2 or more patch files -->
+        <!--
+        <property name="wurflPatches">
+            <list>
+                <value>/WEB-INF/web_browsers_patch.xml</value>
+                <value>/WEB-INF/web_browsers_patch2.xml</value>
+            </list>
+        </property>
+        -->
+
+    </bean>
+
+
+    <!-- =================CapabilitiesHolderFactory CUSTOMIZING========================== -->
+
+    <!-- CapabilitiesHolderFactory -->
+    <bean id="capabilitiesHolderFactory"
+          class="net.sourceforge.wurfl.core.DefaultCapabilitiesHolderFactory">
+        <constructor-arg ref="wurflModel"/>
+    </bean>
+
+    <!--
+   <bean id="capabilitiesHolderFactory"
+       class="net.sourceforge.wurfl.core.HierarchyCapabilitiesHolderFactory">
+       <constructor-arg ref="wurflModel" />
+   </bean>
+    -->
+
+    <!-- =================CACHE CUSTOMIZING========================== -->
+
+    <!-- DeviceCacheProvider -->
+    <bean id="deviceCacheProvider" class="net.sourceforge.wurfl.core.cache.LRUMapCacheProvider"/>
+
+    <!--
+        <bean id="deviceCacheProvider"
+        class="net.sourceforge.wurfl.core.cache.HashMapCacheProvider" />
+    -->
+
+    <!--
+        <bean id="deviceCacheProvider"
+        class="net.sourceforge.wurfl.core.cache.NullCacheProvider" />
+    -->
+
+    <!--
+  <bean id="cacheManager"
+      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+      <property name="configLocation">
+          <value>/WEB-INF/ehcache.xml</value>
+      </property>
+  </bean>
+
+  <bean id="deviceCacheProvider" class="net.sourceforge.wurfl.core.cache.EhCacheProvider">
+      <property name="cache">
+          <bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+              <property name="cacheManager" ref="cacheManager" />
+              <property name="cacheName" value="net.sourceforge.wurfl.core.Device" />
+          </bean>
+      </property>
+  </bean>
+    -->
+
+    <!-- =================ENGINE MANAGER========================== -->
+
+    <!-- WURFLManager, automatically exported in ServletContext, if you need outside Spring. See Javadoc -->
+    <bean id="wurflManager" class="net.sourceforge.wurfl.spring.SpringWurflManager">
+        <property name="wurflModel" ref="wurflModel"/>
+        <property name="capabilitiesHolderFactory" ref="capabilitiesHolderFactory"/>
+        <property name="cacheProvider" ref="deviceCacheProvider"/>
+        <!--if you have only one patchfile , you can write this way-->
+        <property name="wurflPatch" value="/WEB-INF/web_browsers_patch.xml"/>
+
+        <!-- otherwise, for 2 or more patch files -->
+        <!--
+        <property name="wurflPatches">
+            <list>
+                <value>/WEB-INF/web_browsers_patch.xml</value>
+                <value>/WEB-INF/web_browsers_patch2.xml</value>
+            </list>
+        </property>
+        -->
+
+    </bean>
+
+
+</beans>
