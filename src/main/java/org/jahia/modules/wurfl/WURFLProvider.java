@@ -90,4 +90,13 @@ public class WURFLProvider implements ChannelProvider, InitializingBean {
         channelService.addProvider(this);
     }
 
+    public String getFallBack(String identifier) {
+        ModelDevice deviceById = wurflModel.getDeviceById(identifier);
+        return deviceById.getFallBack();
+    }
+
+    public boolean isVisible(String identifier) {
+        //
+        return true;
+    }
 }
