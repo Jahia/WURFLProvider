@@ -14,5 +14,7 @@ You can download the WURFL database zip file from the following location:
 
 http://wurfl.sourceforge.net
 
+and save into the src/main/webapp/WEB-INF directory (by creating it as it doesn't exist by default).
+
 Unfortunately we cannot distribute this file in the module since the license for the database ZIP file is restrictive so
 this is why this step is needed.
