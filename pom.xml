@@ -54,11 +54,18 @@
     <description>Jahia template module that uses WURFL to provide channels.</description>
     <repositories>
         <repository>
-            <id>jahiaRepository</id>
-            <name>Jahia's Maven Repository</name>
-            <url>http://maven.jahia.org/maven2</url>
+            <id>jahia-public</id>
+            <name>Jahia Public Repository</name>
+            <url>https://devtools.jahia.com/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
-    </repositories>
+    </repositories>     
     <pluginRepositories>
         <pluginRepository>
             <id>jahiaRepository</id>
