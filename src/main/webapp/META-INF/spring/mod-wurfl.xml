@@ -15,7 +15,7 @@
     <!-- =================WURFL MODEL REPRESENTATION========================== -->
     <bean id="wurflModel" class="net.sourceforge.wurfl.spring.SpringWURFLModel">
         <!--default root file location-->
-        <property name="wurfl" value="/modules/wurfl-provider/WEB-INF/wurfl-2.3.1.zip"/>
+        <property name="wurfl" value="/modules/wurfl-provider/WEB-INF/wurfl-2.3.4.zip"/>
 
         <!--if you have only one patchfile , you can write this way-->
         <!--<property name="wurflPatch" value="/modules/wurfl-provider/WEB-INF/web_browsers_patch.xml"/>-->
