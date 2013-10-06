@@ -1,6 +1,8 @@
 WURFLProvider
 =============
 
+The WURFLProvider module is an implementation of the WURFL library integration for resolving channels on a Jahia 6.6+ server
+
 IMPORTANT:
 
 In order to use this module, you will first need to download the latest WURFL database into the src/main/webapp/WEB-INF
