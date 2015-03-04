@@ -47,6 +47,10 @@ public class WURFLProvider implements ChannelProvider, InitializingBean {
     public Map<String, String> getChannelCapabilities(String identifier) {
         Map<String,String> results = new HashMap<String, String>();
         ModelDevice deviceById = wurflModel.getDeviceById(identifier);
+        if (deviceById == null) {
+            return null;
+        }
+
         if (!deviceById.getFallBack().equals("root")) {
             results.putAll(channelService.getChannel(deviceById.getFallBack()).getCapabilities());
         }
@@ -92,6 +96,9 @@ public class WURFLProvider implements ChannelProvider, InitializingBean {
 
     public String getFallBack(String identifier) {
         ModelDevice deviceById = wurflModel.getDeviceById(identifier);
+        if (deviceById == null) {
+            return null;
+        }
         return deviceById.getFallBack();
     }
 
